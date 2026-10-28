@@ -6,17 +6,17 @@
   <title>DevOps Portfolio</title>
   <style>
     :root {
-      --bg1: #1a0b3b;
-      --bg2: #3b0f63;
-      --accent: #ff4fd8;
-      --accent2: #00e5ff;
+      --bg1: #071a3d;
+      --bg2: #0b3a8c;
+      --accent: #3d9bff;
+      --accent2: #6ff3ff;
     }
     * { box-sizing: border-box; }
     html, body { height: 100%; margin: 0; }
     body {
       font-family: "Segoe UI", Arial, sans-serif;
       color: #fff;
-      background: radial-gradient(ellipse at 50% 0%, var(--bg2) 0%, var(--bg1) 60%, #07031a 100%);
+      background: radial-gradient(ellipse at 50% 0%, var(--bg2) 0%, var(--bg1) 60%, #030b1f 100%);
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -48,8 +48,8 @@
     .cube div {
       position: absolute; width: 60px; height: 60px;
       border: 2px solid var(--accent);
-      background: rgba(255, 79, 216, 0.12);
-      box-shadow: 0 0 14px rgba(255, 79, 216, 0.5);
+      background: rgba(61, 155, 255, 0.14);
+      box-shadow: 0 0 14px rgba(61, 155, 255, 0.55);
     }
     .cube .f { transform: translateZ(30px); }
     .cube .b { transform: rotateY(180deg) translateZ(30px); }
@@ -63,7 +63,7 @@
     .c2 .cube { animation-duration: 14s; }
     .c3 { top: 18%; right: 12%; transform: scale(1.2); }
     .c3 .cube { animation-duration: 8s; }
-    .c3 .cube div { border-color: var(--accent2); background: rgba(0,229,255,0.1); box-shadow: 0 0 14px rgba(0,229,255,0.5); }
+    .c3 .cube div { border-color: var(--accent2); background: rgba(111,243,255,0.10); box-shadow: 0 0 14px rgba(111,243,255,0.5); }
     .c4 { top: 70%; right: 15%; transform: scale(0.8); }
 
     /* 3D tilt card */
@@ -80,7 +80,7 @@
       -webkit-backdrop-filter: blur(10px);
       box-shadow:
         0 30px 60px rgba(0,0,0,0.55),
-        0 0 50px rgba(255,79,216,0.35),
+        0 0 50px rgba(61,155,255,0.40),
         inset 0 0 30px rgba(255,255,255,0.06);
       transform-style: preserve-3d;
     }
@@ -92,18 +92,18 @@
       -webkit-background-clip: text; background-clip: text;
       color: transparent;
       transform: translateZ(60px);
-      text-shadow: 0 6px 20px rgba(255,79,216,0.35);
+      text-shadow: 0 6px 20px rgba(61,155,255,0.40);
     }
-    .card p { margin: 0 0 22px; color: #e9ddff; transform: translateZ(35px); }
+    .card p { margin: 0 0 22px; color: #dcebff; transform: translateZ(35px); }
     .tags { transform: translateZ(50px); }
     .tag {
       display: inline-block; margin: 5px; padding: 7px 14px;
       border-radius: 8px; font-size: 14px; font-weight: 600;
-      background: linear-gradient(135deg, #7a2bd6, #c026d3);
-      box-shadow: 0 6px 0 #4c1496, 0 10px 18px rgba(0,0,0,0.4);
+      background: linear-gradient(135deg, #1d6fe0, #2fa8ff);
+      box-shadow: 0 6px 0 #0d3f94, 0 10px 18px rgba(0,0,0,0.4);
       transition: transform 0.15s, box-shadow 0.15s;
     }
-    .tag:hover { transform: translateY(4px); box-shadow: 0 2px 0 #4c1496, 0 5px 10px rgba(0,0,0,0.4); }
+    .tag:hover { transform: translateY(4px); box-shadow: 0 2px 0 #0d3f94, 0 5px 10px rgba(0,0,0,0.4); }
 
     @media (prefers-reduced-motion: reduce) {
       .floor, .cube { animation: none; }
