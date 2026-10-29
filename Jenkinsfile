@@ -85,7 +85,7 @@ pipeline {
             }
         }
         
-        stage('Deploy') {
+                stage('Deploy') {
             steps {
                 sh '''
                     docker rm -f devops-app || true
@@ -108,7 +108,8 @@ pipeline {
                 '''
             }
         }
-        
+    }
+
     post {
         success {
             echo "Pipeline OK. Deployed ${ECR_REPO}:${BUILD_NUMBER}"
