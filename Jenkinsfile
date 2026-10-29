@@ -54,7 +54,7 @@ pipeline {
                     docker run -d --name test-app -p 8089:8080 ${IMAGE_NAME}:${BUILD_NUMBER}
 
                     for i in 1 2 3 4 5 6 7 8 9 10; do
-                        if curl -fsS http://localhost:8089 | grep -q "wrong test"; then
+                        if curl -fsS http://localhost:8089 | grep -q "DevOps Portfolio"; then
                             echo "Smoke test passed"
                             exit 0
                         fi
