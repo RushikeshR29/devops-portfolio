@@ -95,3 +95,19 @@ pipeline {
         }
     }
 }
+
+        stage('Deploy') {
+            steps {
+                sh '''
+                    docker rm -f devops-app || true
+                    docker run -d --name devops-app --restart unless-stopped \
+                      -p 80:8080 ${ECR_REPO}:${BUILD_NUMBER}
+
+                    curl --retry 5 --retry-delay 2 --retry-connrefused \
+                      -fsS -o /dev/null http://localhost
+                    echo "Deployed build ${BUILD_NUMBER}"
+
+                    docker image prune -f
+                '''
+            }
+        }
