@@ -84,24 +84,31 @@ pipeline {
                 }
             }
         }
-
+        
         stage('Deploy') {
             steps {
                 sh '''
                     docker rm -f devops-app || true
                     docker run -d --name devops-app --restart unless-stopped \
                       -p 80:8080 ${ECR_REPO}:${BUILD_NUMBER}
-
-                    curl --retry 5 --retry-delay 2 --retry-connrefused \
-                      -fsS -o /dev/null http://localhost
-                    echo "Deployed build ${BUILD_NUMBER}"
-
                     docker image prune -f
+
+                    for i in 1 2 3 4 5 6 7 8 9 10; do
+                        if curl -fsS -o /dev/null http://localhost; then
+                            echo "Deployed build ${BUILD_NUMBER}"
+                            exit 0
+                        fi
+                        echo "Waiting for the app to start (attempt $i)..."
+                        sleep 3
+                    done
+
+                    echo "App did not respond. Container logs:"
+                    docker logs devops-app
+                    exit 1
                 '''
             }
         }
-    }
-
+        
     post {
         success {
             echo "Pipeline OK. Deployed ${ECR_REPO}:${BUILD_NUMBER}"
