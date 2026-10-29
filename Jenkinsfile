@@ -84,17 +84,6 @@ pipeline {
                 }
             }
         }
-    }
-
-    post {
-        success {
-            echo "Image pushed to ECR: ${ECR_REPO}:${BUILD_NUMBER}"
-        }
-        failure {
-            echo 'Pipeline Failed'
-        }
-    }
-}
 
         stage('Deploy') {
             steps {
@@ -111,3 +100,14 @@ pipeline {
                 '''
             }
         }
+    }
+
+    post {
+        success {
+            echo "Pipeline OK. Deployed ${ECR_REPO}:${BUILD_NUMBER}"
+        }
+        failure {
+            echo 'Pipeline Failed'
+        }
+    }
+}
