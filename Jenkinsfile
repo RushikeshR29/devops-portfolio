@@ -41,7 +41,34 @@ pipeline {
                 sh 'docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} .'
             }
         }
+        
+        stage('Test') {
+            steps {
+                sh '''
+                    echo "== Lint Dockerfile =="
+                    docker run --rm -i hadolint/hadolint hadolint --failure-threshold error - < Dockerfile
 
+                    echo "== Smoke test the image =="
+                    docker rm -f test-app || true
+                    trap 'docker rm -f test-app || true' EXIT
+                    docker run -d --name test-app -p 8089:8080 ${IMAGE_NAME}:${BUILD_NUMBER}
+
+                    for i in 1 2 3 4 5 6 7 8 9 10; do
+                        if curl -fsS http://localhost:8089 | grep -q "DevOps Portfolio"; then
+                            echo "Smoke test passed"
+                            exit 0
+                        fi
+                        echo "Waiting for the test container (attempt $i)..."
+                        sleep 3
+                    done
+
+                    echo "Smoke test FAILED. Container logs:"
+                    docker logs test-app
+                    exit 1
+                '''
+            }
+        }
+        
         stage('ECR Login') {
             steps {
                 withCredentials([usernamePassword(
